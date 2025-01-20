@@ -39,6 +39,12 @@ func main() {
 	routes.LocationRoutes(app)
 	routes.SearchRoutes(app)
 
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8600"
+	}
+
 	// Start server
-	log.Fatal(app.Listen(":4000"))
+	log.Fatal(app.Listen(":"+port))
 }
