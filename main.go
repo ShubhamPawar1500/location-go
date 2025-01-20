@@ -20,6 +20,13 @@ func main() {
 	// Create a new Fiber app
 	app := fiber.New()
 
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "*",
+		AllowMethods:     "GET, POST, PUT, DELETE",
+		AllowHeaders:     "Origin, Content-Type, Accept",
+		AllowCredentials: true,
+	}))
+
 	app.Use(middleware.ResponseTimeMiddleware)
 
 	app.Get("/", func(c *fiber.Ctx) error {
