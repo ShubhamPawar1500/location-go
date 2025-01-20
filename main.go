@@ -23,10 +23,10 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     os.Getenv("ALLOWED_ORIGIN"),
+		AllowOrigins:     "*",
 		AllowMethods:     "GET, POST, PUT, DELETE",
 		AllowHeaders:     "Origin, Content-Type, Accept",
-		AllowCredentials: true,
+		AllowCredentials: false,
 	}))
 
 	app.Use(middleware.ResponseTimeMiddleware)
@@ -42,9 +42,9 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		port = "8600"
+		port = "8080"
 	}
 
 	// Start server
-	log.Fatal(app.Listen(":"+port))
+	log.Fatal(app.Listen(":" + port))
 }
